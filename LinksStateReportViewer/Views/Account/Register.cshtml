@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+<form id="app" @@submit="checkForm" action="/Account/Register" method="post" novalidate="true">
+    <p v-if="errors.length">
+        <b>Please fix below errors:</b>
+        <ul>
+            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </p>
+
+    <p>
+        <label>Email</label>
+        <input type="email" name="email" id="email" v-model="email">
+    </p>
+
+    <p>
+        <label>Password</label>
+        <input type="password" name="password" id="password" v-model="password" />
+    </p>
+
+    <p>
+        <label>Repeat password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" v-model="confirmPassword" />
+    </p>
+
+    <p>
+        <input type="submit" value="Register">
+    </p>
+</form>
+
+<script src="~/Scripts/Custom/register.js"></script>
