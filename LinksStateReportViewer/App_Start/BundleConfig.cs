@@ -25,7 +25,9 @@ namespace LinksStateReportViewer
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/vue").Include(
-                      "~/Scripts/vue.js"));
+                      "~/Scripts/vue.js",
+                      "~/Scripts/axios.js",
+                      "~/Scripts/Custom/utils.js"));
         }
     }
 }

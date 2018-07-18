@@ -13,14 +13,20 @@ namespace LinksState.BLL.Services
 {
     public class LinkStatesService: BaseCRUDService<LinkState, LinkStateDTO>, ILinkStatesService
     {
+      
         public LinkStatesService(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
-
         }
 
         public IEnumerable<LinkStateDTO> GetByRequestId(int requestId)
         {
             var entities = uof.Repository<LinkState>().Get(s => s.CheckRequest.ID == requestId);
+            var entitiesDTO = Mapper.Map<IEnumerable<LinkStateDTO>>(entities);
+            return entitiesDTO;
+        }
+        public IEnumerable<LinkStateDTO> GetNewLinkStates(int checkRequestId, int lastLinkStateId)
+        {
+            var entities = uof.Repository<CheckRequest>().GetById(checkRequestId).LinkStates.Where(s => s.ID > lastLinkStateId);
             var entitiesDTO = Mapper.Map<IEnumerable<LinkStateDTO>>(entities);
             return entitiesDTO;
         }

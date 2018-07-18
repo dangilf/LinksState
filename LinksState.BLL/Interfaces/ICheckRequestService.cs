@@ -10,7 +10,7 @@ namespace LinksState.BLL.Interfaces
 {
     public interface ICheckRequestService: IBaseService<CheckRequest, CheckRequestDTO>
     {
-        IEnumerable<LinkStateDTO> GetAllLinkStates(int checkRequestId);
+        IEnumerable<LinkStateDTO> GetAllLinkStates(int checkRequestId);        
         void StartCheckingLinks(int checkRequestId);
 
     }

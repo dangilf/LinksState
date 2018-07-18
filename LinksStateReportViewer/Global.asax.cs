@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinksState.BLL.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,7 @@ namespace LinksStateReportViewer
     {
         protected void Application_Start()
         {
+            AutoMapperConfig.Initialize();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

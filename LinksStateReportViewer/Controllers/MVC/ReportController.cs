@@ -9,7 +9,17 @@ namespace LinksStateReportViewer.Controllers.MVC
     public class ReportController : Controller
     {
         // GET: Report
-        public ActionResult CreateReport()
+        public ActionResult CreateRequest()
+        {
+            return View();
+        }
+
+        public ActionResult ViewPersonalReports()
+        {
+            return View();
+        }
+
+        public ActionResult ViewReportResult()
         {
             return View();
         }

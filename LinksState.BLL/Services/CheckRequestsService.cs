@@ -13,9 +13,12 @@ namespace LinksState.BLL.Services
 {
     public class CheckRequestsService : BaseCRUDService<CheckRequest, CheckRequestDTO>, ICheckRequestService
     {
-        public CheckRequestsService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        IHtmlParser _pageParser;
+        IWebHelper _webHelper;
+        public CheckRequestsService(IUnitOfWork unitOfWork, IHtmlParser pageParser, IWebHelper webHelper) : base(unitOfWork)
         {
-
+            _pageParser = pageParser;
+            _webHelper = webHelper;
         }
 
         public IEnumerable<LinkStateDTO> GetAllLinkStates(int checkRequestId)
@@ -25,18 +28,40 @@ namespace LinksState.BLL.Services
             return entitiesDTO;
         }
 
+        
+
         public async void StartCheckingLinks(int checkRequestId)
         {
             var request = uof.Repository<CheckRequest>().GetById(checkRequestId);
-            if (request == null)
+            if (request == null || request.NestingLevel == 0)
                 return;
-            await Task.Run(() => ProcessRequest(request));
+            await Task.Run(() => ProcessRequest(request, request.BaseUrl, request.NestingLevel));
         }
 
         #region Private Methods
-        private void ProcessRequest(CheckRequest request)
-        {
-            //TODO
+        private void ProcessRequest(CheckRequest request, string url, int nestingLevel)
+        {   
+
+            var statusCode = _webHelper.GetStatusCode(url);
+
+            LinkState state = new LinkState()
+            {
+                CheckRequest = request,
+                StatusCode = statusCode,
+                URL = url
+            };
+            uof.Repository<LinkState>().Create(state);
+            uof.Save();
+
+            if (nestingLevel > 0)
+            { 
+                var html = _webHelper.GetHtmlCodeByLink(url);
+                var links = _pageParser.GetLinksFromHtml(url, html);
+                foreach (var link in links)
+                {                    
+                    ProcessRequest(request, link, nestingLevel - 1);
+                }
+            }
         }
         #endregion
     }

@@ -32,11 +32,12 @@ namespace LinksState.BLL.Services
             return entityDTO;
         }
 
-        public void Create(TDTO entityDTO)
+        public int Create(TDTO entityDTO)
         {
             var entity = Mapper.Map<TEntity>(entityDTO);
             uof.Repository<TEntity>().Create(entity);
             uof.Save();
+            return entity.ID;
         }
 
         public void Delete(TDTO entityDTO)

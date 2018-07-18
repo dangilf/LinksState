@@ -22,9 +22,15 @@ namespace LinksStateReportViewer.Controllers.API
 
         [HttpGet]
         [Route("{checkRequestId}/linkStates")]
-        public IEnumerable<LinkStateDTO> GetByRequestId(int checkRequestId)
+        public IEnumerable<LinkStateDTO> GetAllByRequestId(int checkRequestId)
         {
             return _linkStatesService.GetByRequestId(checkRequestId);
+        }
+
+        [Route("{checkRequestId}/newLinkStates/{lastId}")]
+        public IEnumerable<LinkStateDTO> GetNewByRequestId(int checkRequestId, int lastId)
+        {
+            return _linkStatesService.GetNewLinkStates(checkRequestId,lastId);
         }
     }
 }

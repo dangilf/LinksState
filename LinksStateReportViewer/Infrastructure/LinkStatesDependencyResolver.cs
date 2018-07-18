@@ -35,6 +35,9 @@ namespace LinksStateReportViewer.Infrastructure
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
             kernel.Bind<ICheckRequestService>().To<CheckRequestsService>();
             kernel.Bind<ILinkStatesService>().To<LinkStatesService>();
+            kernel.Bind<IHtmlParser>().To<HtmlParser>();
+            kernel.Bind<IWebHelper>().To<WebHelper>();
+
         }
     }
 }

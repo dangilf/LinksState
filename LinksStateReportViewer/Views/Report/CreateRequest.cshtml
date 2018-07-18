@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "CreateReport";
+}
+
+<h2>CommonReport</h2>
+
+<div id="app">
+    <p>
+        <label>Url:</label>
+        <input type="text" name="baseUrl" id="baseUrl" v-model="baseUrl">
+    </p>
+    <p>
+        <label>Nesting level:</label>
+        <input type="number" name="nestingLevel" id="nestingLevel" v-model="nestingLevel">
+    </p>
+    <p>
+        <button v-on:click="createRequest">Create request</button>
+    </p>
+    <a v-on:click="openReport" v-show="requestId != null" href="#">Open Report</a>
+</div>
+
+<script>
+    var userName='@User.Identity.GetUserName()'
+</script>
+<script src="~/Scripts/Custom/createRequest.js"></script>

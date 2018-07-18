@@ -50,6 +50,11 @@
     <Compile Include="EF\IUnitOfWork.cs" />
     <Compile Include="EF\LinkStatesDBContext.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="Migrations\201807182118459_initial.cs" />
+    <Compile Include="Migrations\201807182118459_initial.Designer.cs">
+      <DependentUpon>201807182118459_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntity.cs" />
     <Compile Include="Models\CheckRequest.cs" />
     <Compile Include="Models\LinkState.cs" />
@@ -60,6 +65,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201807182118459_initial.resx">
+      <DependentUpon>201807182118459_initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

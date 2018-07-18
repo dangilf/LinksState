@@ -36,9 +36,9 @@ namespace LinksStateReportViewer.Controllers.API
 
         [HttpPost]
         [Route("")]
-        public void Create([FromBody]TDTO model)
+        public int Create([FromBody]TDTO model)
         {
-            baseService.Create(model);
+            return baseService.Create(model);
         }
 
         [HttpPut]

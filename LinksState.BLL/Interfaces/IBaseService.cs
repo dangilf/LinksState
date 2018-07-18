@@ -12,7 +12,7 @@ namespace LinksState.BLL.Interfaces
     {
         IEnumerable<TDTO> GetAll();
         TDTO GetById(int id);
-        void Create(TDTO entity);
+        int Create(TDTO entity);
         void Delete(TDTO entity);
         void Delete(int id);
         void Update(TDTO entity);

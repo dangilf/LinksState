@@ -12,5 +12,6 @@ namespace LinksState.BLL.Interfaces
     {
         CheckRequestDTO GetParentRequest(int linkStateId);
         IEnumerable<LinkStateDTO> GetByRequestId(int requestId);
+        IEnumerable<LinkStateDTO> GetNewLinkStates(int checkRequestId, int lastLinkStateId);
     }
 }
