@@ -300,6 +300,7 @@
     <Content Include="Scripts\Custom\login.js" />
     <Content Include="Scripts\Custom\register.js" />
     <Content Include="Scripts\Custom\utils.js" />
+    <Content Include="Scripts\Custom\viewPersonalReports.js" />
     <Content Include="Scripts\Custom\viewReport.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -332,6 +333,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Report\CreateRequest.cshtml" />
     <Content Include="Views\Report\ViewReportResult.cshtml" />
+    <Content Include="Views\Report\ViewPersonalReports.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

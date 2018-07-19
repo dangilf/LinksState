@@ -6,10 +6,10 @@
 <h2>ViewReportResult</h2>
 
 <div id="app">
-    <p>
+    <p v-if="!personal || results.length == 0">
         <button v-on:click="startCheck">Start Check</button>
     </p>
-    <table v-if="results">
+    <table v-if="results.length > 0" class="table table-bordered">
         <thead>
             <tr>
                 <th>Url</th>
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             <tr v-for="result in results">
-                <td>{{result.URL}}</td>
+                <td style="max-width:400px; word-wrap:break-word">{{result.URL}}</td>
                 <td>{{result.StatusCode}}</td>
             </tr>
         </tbody>

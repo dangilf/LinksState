@@ -27,5 +27,11 @@ namespace LinksStateReportViewer.Controllers.API
             _checkRequestService.StartCheckingLinks(checkrequestId);
         }
 
+        [HttpGet]
+        [Route("personal/{mail}/")]
+        public IEnumerable<CheckRequestDTO> GetPersonalRequests(string mail)
+        {
+            return _checkRequestService.GetPersonalRequests(mail);
+        }
     }
 }

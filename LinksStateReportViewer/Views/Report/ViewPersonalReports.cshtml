@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "ViewPersonalReports";
+}
+
+<h2>ViewPersonalReports</h2>
+
+<div id="app">
+    <table v-if="results" class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Base URL</th>
+                <th>Nesting Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="result in results">
+                <td style="max-width:400px; word-wrap:break-word">
+                    <a :href="'viewreportresult?requestid='+result.ID+'&user=@User.Identity.GetUserName()'">{{result.BaseUrl}}</a>
+                </td>
+                <td>{{result.NestingLevel}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    var userName='@User.Identity.GetUserName()'
+</script>
+<script src="~/Scripts/Custom/viewPersonalReports.js"></script>

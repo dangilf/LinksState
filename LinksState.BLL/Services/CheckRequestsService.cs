@@ -28,7 +28,12 @@ namespace LinksState.BLL.Services
             return entitiesDTO;
         }
 
-        
+        public IEnumerable<CheckRequestDTO> GetPersonalRequests(string mail)
+        {
+            var entities = uof.Repository<CheckRequest>().Get(r => r.UserName.Equals(mail, StringComparison.InvariantCultureIgnoreCase));
+            var entitiesDTO = Mapper.Map<IEnumerable<CheckRequestDTO>>(entities);
+            return entitiesDTO;
+        }
 
         public async void StartCheckingLinks(int checkRequestId)
         {
