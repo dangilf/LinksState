@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace LinksStateReportViewer.Controllers.API
 {
@@ -32,6 +33,23 @@ namespace LinksStateReportViewer.Controllers.API
         public IEnumerable<CheckRequestDTO> GetPersonalRequests(string mail)
         {
             return _checkRequestService.GetPersonalRequests(mail);
+        }
+        [HttpPost]
+        [Route("uploadCsv/{mail}/")]
+        public async void UploadCsv(string mail)
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+
+            var provider = new MultipartMemoryStreamProvider();
+            await Request.Content.ReadAsMultipartAsync(provider);
+            foreach (var file in provider.Contents)
+            {
+                var filename = file.Headers.ContentDisposition.FileName.Trim('\"');
+                var buffer =await file.ReadAsByteArrayAsync();               
+                
+                _checkRequestService.AddRequestsFromCsv(buffer, mail);
+            }
         }
     }
 }

@@ -5,7 +5,10 @@
 
 <h2>ViewPersonalReports</h2>
 
+
 <div id="app">
+    <label>Upload CSV:</label>
+    <input type="file" id="upload" name="upload" @@change="processFile($event)" value="Upload CSV" />
     <table v-if="results" class="table table-bordered">
         <thead>
             <tr>

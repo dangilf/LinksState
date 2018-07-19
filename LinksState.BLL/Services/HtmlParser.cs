@@ -18,9 +18,16 @@ namespace LinksState.BLL.Services
             MatchCollection matches = reg.Matches(htmlString);
             foreach (Match match in matches)
             {
-                string link = RemoveUnnecessary(match.Value);
-                link = new Uri(new Uri(baseUrl), link).ToString();
-                links.Add(link);
+                try
+                {
+                    string link = RemoveUnnecessary(match.Value);
+                    link = new Uri(new Uri(baseUrl), link).ToString();
+                    links.Add(link);
+                }
+                catch(Exception ex)
+                {
+                    //TODO
+                }
             }
             return links;
         }

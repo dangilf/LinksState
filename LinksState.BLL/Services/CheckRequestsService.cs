@@ -15,10 +15,30 @@ namespace LinksState.BLL.Services
     {
         IHtmlParser _pageParser;
         IWebHelper _webHelper;
-        public CheckRequestsService(IUnitOfWork unitOfWork, IHtmlParser pageParser, IWebHelper webHelper) : base(unitOfWork)
+        ICsvParser _csvParser;
+        public CheckRequestsService(IUnitOfWork unitOfWork, IHtmlParser pageParser, IWebHelper webHelper, ICsvParser csvParser) : base(unitOfWork)
         {
             _pageParser = pageParser;
             _webHelper = webHelper;
+            _csvParser = csvParser;
+        }
+
+        public async void AddRequestsFromCsv(byte[] csv, string mail)
+        {
+            var lines=_csvParser.GetContent(csv);
+            foreach (var line in lines)
+            {
+                var url = line.First();
+                var nestingLevel = Convert.ToInt32(line.Last());
+                var request = new CheckRequest()
+                {
+                    BaseUrl = url,
+                    NestingLevel = nestingLevel,
+                    UserName = mail
+                };
+                uof.Repository<CheckRequest>().Create(request);
+                uof.Save();
+            }
         }
 
         public IEnumerable<LinkStateDTO> GetAllLinkStates(int checkRequestId)

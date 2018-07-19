@@ -13,6 +13,7 @@ namespace LinksState.BLL.Interfaces
         IEnumerable<LinkStateDTO> GetAllLinkStates(int checkRequestId);        
         void StartCheckingLinks(int checkRequestId);
         IEnumerable<CheckRequestDTO> GetPersonalRequests(string mail);
+        void AddRequestsFromCsv(byte[] csv, string mail);
 
     }
 }
