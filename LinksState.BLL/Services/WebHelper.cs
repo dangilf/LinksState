@@ -11,8 +11,14 @@ namespace LinksState.BLL.Services
     public class WebHelper : IWebHelper
     {
         WebClient client = new WebClient();
+        public WebHelper()
+        {
+            client.Credentials = new NetworkCredential("gilfanovd", "61Ubkmafyjd", "russia");
+        }
+
         public string GetHtmlCodeByLink(string link)
         {
+            client.UseDefaultCredentials = true;
             string htmlCode = string.Empty;
             try
             {
@@ -34,11 +40,14 @@ namespace LinksState.BLL.Services
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 statusCode = (int)response.StatusCode;
                 response.Close();
-                
+
             }
             catch (WebException e)
-            {               
-                statusCode = (int)((HttpWebResponse)e.Response).StatusCode;               
+            {
+                if (e.Response != null)
+                {
+                    statusCode = (int)((HttpWebResponse)e.Response).StatusCode;
+                }
             }
             catch (Exception ex)
             {

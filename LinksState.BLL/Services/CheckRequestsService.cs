@@ -53,7 +53,7 @@ namespace LinksState.BLL.Services
             uof.Repository<LinkState>().Create(state);
             uof.Save();
 
-            if (nestingLevel > 0)
+            if (nestingLevel > 0 )
             { 
                 var html = _webHelper.GetHtmlCodeByLink(url);
                 var links = _pageParser.GetLinksFromHtml(url, html);
