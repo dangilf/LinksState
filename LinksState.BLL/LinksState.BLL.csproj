@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IBaseService.cs" />
     <Compile Include="Interfaces\ICheckRequestService.cs" />
+    <Compile Include="Interfaces\ICsvParser.cs" />
     <Compile Include="Interfaces\ILinkStatesService.cs" />
     <Compile Include="Interfaces\IHtmlParser.cs" />
     <Compile Include="Interfaces\IWebHelper.cs" />
@@ -58,10 +59,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BaseCRUDService.cs" />
     <Compile Include="Services\CheckRequestsService.cs" />
+    <Compile Include="Services\CsvParser.cs" />
     <Compile Include="Services\HtmlParser.cs" />
     <Compile Include="Services\LinkStatesService.cs" />
+    <Compile Include="Util\Logger.cs" />
     <Compile Include="Services\WebHelper.cs" />
     <Compile Include="Util\AutoMapperConfig.cs" />
+    <Compile Include="Util\MailSender.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LinksState.DAL\LinksState.DAL.csproj">

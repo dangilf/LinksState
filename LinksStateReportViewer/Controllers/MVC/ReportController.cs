@@ -14,11 +14,12 @@ namespace LinksStateReportViewer.Controllers.MVC
             return View();
         }
 
+        [Authorize]
         public ActionResult ViewPersonalReports()
         {
             return View();
         }
-
+        
         public ActionResult ViewReportResult()
         {
             return View();
