@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace LinksStateReportViewer.Controllers.API
 {
+    
     public abstract class BaseApiController<TEntity, TDTO> : ApiController where TEntity : BaseEntity where TDTO : BaseDTO
     {
         internal IBaseService<TEntity, TDTO> baseService;
@@ -19,7 +21,7 @@ namespace LinksStateReportViewer.Controllers.API
         {
             baseService = svc;
         }
-
+        
         [HttpGet]
         [Route("")]
         public IEnumerable<TDTO> GetAll()

@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 namespace LinksState.BLL.Util
 {
     public static class Logger
-    {
-        
+    {   
         public static void LogError(Exception ex, string prefix)
         {
+            var mailSender = MailSender.GetInstance(Config.Server, Config.Port);
+
             var message = prefix + Environment.NewLine +
                 ex.Message + Environment.NewLine + ex.StackTrace;
             MailSender.SendErrorMessage(message);

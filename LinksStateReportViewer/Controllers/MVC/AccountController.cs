@@ -6,6 +6,9 @@ using Microsoft.Owin.Security.Cookies;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -17,6 +20,7 @@ namespace LinksStateReportViewer.Controllers.MVC
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
 
         public AccountController()
         {
@@ -76,13 +80,13 @@ namespace LinksStateReportViewer.Controllers.MVC
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToAction("Index","Home");              
+                    return RedirectToAction("Index", "Home");
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
         }
-        
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -100,12 +104,11 @@ namespace LinksStateReportViewer.Controllers.MVC
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-               
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -114,7 +117,7 @@ namespace LinksStateReportViewer.Controllers.MVC
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        
+
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -123,7 +126,7 @@ namespace LinksStateReportViewer.Controllers.MVC
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-        
+
 
         protected override void Dispose(bool disposing)
         {
@@ -170,7 +173,7 @@ namespace LinksStateReportViewer.Controllers.MVC
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
-        }       
+        }
         #endregion
     }
 }

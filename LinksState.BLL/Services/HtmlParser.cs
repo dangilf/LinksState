@@ -1,4 +1,5 @@
 ﻿using LinksState.BLL.Interfaces;
+using LinksState.BLL.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,8 @@ namespace LinksState.BLL.Services
                 }
                 catch(Exception ex)
                 {
-                    //TODO
+                    var message = $"An error occured parsing {baseUrl}.";
+                    Logger.LogError(ex, message);
                 }
             }
             return links;

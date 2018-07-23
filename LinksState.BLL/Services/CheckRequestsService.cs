@@ -25,7 +25,8 @@ namespace LinksState.BLL.Services
 
         public async void AddRequestsFromCsv(byte[] csv, string mail)
         {
-            var lines=_csvParser.GetContent(csv);
+            var lines = _csvParser.GetContent(csv);
+            
             foreach (var line in lines)
             {
                 var url = line.First();

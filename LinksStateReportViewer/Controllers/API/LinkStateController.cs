@@ -27,6 +27,7 @@ namespace LinksStateReportViewer.Controllers.API
             return _linkStatesService.GetByRequestId(checkRequestId);
         }
 
+        [HttpGet]
         [Route("{checkRequestId}/newLinkStates/{lastId}")]
         public IEnumerable<LinkStateDTO> GetNewByRequestId(int checkRequestId, int lastId)
         {
